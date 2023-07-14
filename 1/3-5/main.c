@@ -3,38 +3,36 @@
 
 #pragma warning (disable: 4996)
 
-int is_equal(FILE *f_in, int *ans) {
-	double x = 0, y = 0;
-	*ans = 1;
-
-	if (fscanf(f_in, "%lf", &x) != 1) return -1;
-
-	y = x;
-	do {
-		if (x != y) {
-			*ans = 0;
-			break;
-		}
-	}
-	while (fscanf(f_in, "%lf", &x) == 1);
-	
+int input(FILE *f_in, int *x) {
+	if (fscanf(f_in, "%d", x) != 1) return -1;
 	return 0;
+}
+
+int find_pos(int x, int *pos) {
+	*pos = -1;
+	
+	while (x != 0) {
+		x = x >> 1;
+		(*pos)++;
+	}
 }
 
 int main(int argc, char *argv[]) {
 	if (argc != 3) return -1;
-	
+
 	FILE *f_in, *f_out;
-	int ans = 0, err = 0;
+	int x = 0, pos = 0, err = 0;
 
 	f_in = fopen(argv[1], "r");
 	f_out = fopen(argv[2], "w");
 	if (f_in == NULL || f_out == NULL) return -1;
-	
-	err = is_equal(f_in, &ans);
+
+	err = input(f_in, &x);
 	if (err != 0) return -1;
 
-	fprintf(f_out, "%d", ans);
+	find_pos(x, &pos);
+
+	fprintf(f_out, "%d", pos);
 
 	fclose(f_in);
 	fclose(f_out);

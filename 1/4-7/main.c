@@ -22,9 +22,23 @@ int input(FILE *f_in, double **arr, int *len) {
 	return 0;
 }
 
-void reverse_arr(double *arr, int len) {
-	double temp = 0;
-	for (int i = 0; i < len / 2; i++) SWAP(arr[i], arr[len - i - 1], temp);
+void q_sort(double *arr, int first, int last) {
+	int left = first, right = last;
+	double temp = 0, middle = arr[(first + last) / 2];
+
+	do {
+		while (arr[left] < middle) left++;
+		while (arr[right] > middle) right--;
+		if (left <= right) {
+			SWAP(arr[left], arr[right], temp);
+			left++;
+			right--;
+		}
+	}
+	while (left <= right);
+
+	if (first < right) q_sort(arr, first, right);
+	if (last > left) q_sort(arr, left, last);
 }
 
 int main(int argc, char *argv[]) {
@@ -41,7 +55,7 @@ int main(int argc, char *argv[]) {
 	err = input(f_in, &arr, &len);
 	if (err != 0) return -1;
 
-	reverse_arr(arr, len);
+	q_sort(arr, 0, len - 1);
 
 	fprintf(f_out, "%d ", len);
 	for (int i = 0; i < len; i++) fprintf(f_out, "%lf ", arr[i]);

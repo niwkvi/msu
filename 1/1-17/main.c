@@ -34,10 +34,10 @@ int find_max_len(FILE *f_in, int *max_len) {
 }
 
 int main(int argc, char *argv[]) {
+	if (argc != 3) return -1;
+
 	FILE *f_in, *f_out;
 	int max_len = 0, err = 0;
-
-	if (argc != 3) return -1;
 
 	f_in = fopen(argv[1], "r");
 	f_out = fopen(argv[2], "w");

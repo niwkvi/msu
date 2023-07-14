@@ -22,10 +22,10 @@ int count_min_values(FILE *f_in, int *count) {
 }
 
 int main(int argc, char *argv[]) {
+	if (argc != 3) return -1;
+	
 	FILE *f_in, *f_out;
 	int count = 0, err = 0;
-
-	if (argc != 3) return -1;
 
 	f_in = fopen(argv[1], "r");
 	f_out = fopen(argv[2], "w");
