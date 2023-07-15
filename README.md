@@ -53,44 +53,39 @@
 
 **Раздел 1. Файловый менеджер**
 
-- 1-8 Копирование
+- [1-8 Копирование](https://github.com/niwkvi/MSU/tree/main/3/1-8)
 
 **Раздел 2. Менеджер памяти**
 
-- 2-2 Переменный стэк
+- [2-2 Переменный стэк](https://github.com/niwkvi/MSU/tree/main/3/2-2)
 
 # Семестр 4. Практикум на ЭВМ. Основы ООП
 
 **Раздел 1. Контейнер**
 
-- 1-7 Ассоциативная таблица
+- [1-7 Ассоциативная таблица](https://github.com/niwkvi/MSU/tree/main/4/1-7)
 
 # Семестр 5. Практикум на ЭВМ. Дискретная оптимизация
 
-- 27 Нахождение кратчайшего пути
+- [1-27 Нахождение кратчайшего пути](https://github.com/niwkvi/MSU/tree/main/5/1-27)
 
 # Семестр 6. Практикум на Python
 
 **Семинары**
 
-- seminar01
-- seminar02
-- seminar03
-- seminar04
-- seminar05
-- seminar06
-- seminar07knn
-
-**Соревнование на Kaggle**
-
-- competition
+- [seminar02](https://github.com/niwkvi/MSU/tree/main/6/seminar02)
+- [seminar03](https://github.com/niwkvi/MSU/tree/main/6/seminar03)
+- [seminar04](https://github.com/niwkvi/MSU/tree/main/6/seminar04)
+- [seminar05](https://github.com/niwkvi/MSU/tree/main/6/seminar05)
+- [seminar06](https://github.com/niwkvi/MSU/tree/main/6/seminar06)
+- [seminar07knn](https://github.com/niwkvi/MSU/tree/main/6/seminar07knn)
 
 # Семестр 7. Практикум на ЭВМ. Численные методы
 
 **Раздел 1. Дифференциальные уравнения**
 
-- 1-31 Метод Нюстрема и метод Ньютона
+- [1-31 Метод Нюстрема и метод Ньютона](https://github.com/niwkvi/MSU/tree/main/7/1-31)
 
 **Раздел 2. Работа с массивами**
 
-- 2-4 Метод Гаусса-Жордана с выбором главного элемента по строке
+- [2-4 Метод Гаусса-Жордана с выбором главного элемента по строке](https://github.com/niwkvi/MSU/tree/main/7/2-4)
