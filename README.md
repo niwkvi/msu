@@ -1,6 +1,6 @@
 # MSU
 
-Написанные программы для курсов Практикум, Численные методы, Конструирование компиляторов на Python, C, C++
+Написанные программы для курсов Практикум, Численные методы, Конструирование компиляторов на C, C++, Python.
 
 <details>
     <summary>
@@ -9,30 +9,30 @@
 
 **Раздел 1. Обработка последовательностей**
 
-- 1-6 Равенство
-- 1-13 Минимум 2
-- 1-17 Длина
+- [1-6 Равенство](https://github.com/niwkvi/MSU/tree/main/1/1-6)
+- [1-13 Минимум 2](https://github.com/niwkvi/MSU/tree/main/1/1-13)
+- [1-17 Длина](https://github.com/niwkvi/MSU/tree/main/1/1-17)
 
 **Раздел 2. Работа с массивами**
 
-- 2-2 Перестановка
-- 2-12 Объединение
-- 2-13 Арифметика
+- [2-2 Перестановка](https://github.com/niwkvi/MSU/tree/main/1/2-2)
+- [2-12 Объединение](https://github.com/niwkvi/MSU/tree/main/1/2-12)
+- [2-13 Арифметика](https://github.com/niwkvi/MSU/tree/main/1/2-13)
 
 **Раздел 3. Битовые операции**
 
-- 3-1 Степень
-- 3-5 Старшина
+- [3-1 Степень](https://github.com/niwkvi/MSU/tree/main/1/3-1)
+- [3-5 Старшина](https://github.com/niwkvi/MSU/tree/main/1/3-5)
 
 **Раздел 4. Сортировки**
 
-- 4-7 Быстрая
-- 4-8 Подсчетом
+- [4-7 Быстрая](https://github.com/niwkvi/MSU/tree/main/1/4-7)
+- [4-8 Подсчетом](https://github.com/niwkvi/MSU/tree/main/1/4-8)
 
 **Раздел 5. Вычислительная геометрия**
 
-- 5-2 Выпуклость многоугольника
-- 5-6 Круг
+- [5-2 Выпуклость многоугольника](https://github.com/niwkvi/MSU/tree/main/1/5-2)
+- [5-6 Круг](https://github.com/niwkvi/MSU/tree/main/1/5-6)
 
 </details>
 
