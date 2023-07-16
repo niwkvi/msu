@@ -13,14 +13,11 @@ size_t lss_memsize_17_04(int n) {
 }
 
 int lss_17_04(int n, double *A, double *B, double *X, double *tmp) {
-    if (flag_debug) {
-        printf("\nAlgorithm has started\n\n");
-    }
+    if (flag_debug) printf("\nAlgorithm has started\n\n");
 
     clock_t time_start = clock();
 
     for (int i = 0; i < n; i++) {
-
         if (flag_debug) {
             clock_t time_now = clock();
             double time = 1.0 * (time_now - time_start) / CLOCKS_PER_SEC;
@@ -39,9 +36,7 @@ int lss_17_04(int n, double *A, double *B, double *X, double *tmp) {
         }
 
         if (main_elem_abs < EPS) {
-            if (fabs(B[i]) >= EPS) {
-                return 1;
-            }
+            if (fabs(B[i]) >= EPS) return 1;
             tmp[i] = -1;
 			continue;
 		}
@@ -54,9 +49,8 @@ int lss_17_04(int n, double *A, double *B, double *X, double *tmp) {
         }
 
         double main_elem = A[n * i + main_col];
-        for (int j = 0; j < n; j++) {
-            A[n * i + j] /= main_elem;
-        }
+
+        for (int j = 0; j < n; j++) A[n * i + j] /= main_elem;
         B[i] /= main_elem;
 
         if (flag_debug) {
@@ -69,9 +63,7 @@ int lss_17_04(int n, double *A, double *B, double *X, double *tmp) {
         for (int j = 0; j < n; j++) {
             if (i == j) continue;
             double cur_elem = A[n * j + main_col];
-            for (int k = 0; k < n; k++) {
-                A[n * j + k] -= A[n * i + k] * cur_elem;
-            }
+            for (int k = 0; k < n; k++) A[n * j + k] -= A[n * i + k] * cur_elem;
             B[j] -= B[i] * cur_elem;
         }
 
@@ -86,9 +78,7 @@ int lss_17_04(int n, double *A, double *B, double *X, double *tmp) {
     }
 
     for (int i = 0; i < n; i++) {
-        if (fabs(tmp[i] - (-1)) >= EPS) {
-            X[(int)tmp[i]] = B[i];
-        }
+        if (fabs(tmp[i] - (-1)) >= EPS) X[(int)tmp[i]] = B[i];
     }
 
     if (flag_debug) {

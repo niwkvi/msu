@@ -16,17 +16,11 @@ char *out_filename = "lss_17_04_out.txt";
 
 void errors(int error_id) {
     if (flag_errors) {
-        if (error_id == -2) {
-            fprintf(stderr, "Memory Allocation Error");
-        } else if (error_id == -3) {
-            fprintf(stderr, "Command Line Error");
-        } else if (error_id == -4) {
-            fprintf(stderr, "Input Data Error");
-        } else if (error_id == -5) {
-            fprintf(stderr, "Output Data Error");
-        } else if (error_id == -6) {
-            fprintf(stderr, "-h or -?");
-        }
+        if (error_id == -2) fprintf(stderr, "Memory Allocation Error");
+        else if (error_id == -3) fprintf(stderr, "Command Line Error");
+        else if (error_id == -4) fprintf(stderr, "Input Data Error");
+        else if (error_id == -5) fprintf(stderr, "Output Data Error");
+        else if (error_id == -6) fprintf(stderr, "-h or -?");
     }
 }
 
@@ -38,10 +32,10 @@ void mem_free() {
 }
 
 void mem_alloc() {
-    A = (double *) calloc(n * n, sizeof(double));
-    B = (double *) calloc(n, sizeof(double));
-    X = (double *) calloc(n, sizeof(double));
-    tmp = (double *) malloc(lss_memsize_17_04(n));
+    A = (double*)calloc(n * n, sizeof(double));
+    B = (double*)calloc(n, sizeof(double));
+    X = (double*)calloc(n, sizeof(double));
+    tmp = (double*)malloc(lss_memsize_17_04(n));
 
     if (A == NULL || B == NULL || X == NULL || tmp == NULL) {
         mem_free();
@@ -53,16 +47,11 @@ void mem_alloc() {
 void print_matrix() {
     printf("Matrix A\n");
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%lf\t", A[n * i + j]);
-        }
+        for (int j = 0; j < n; j++) printf("%lf\t", A[n * i + j]);
         printf("\n");
     }
-
     printf("Matrix B\n");
-    for (int i = 0; i < n; i++) {
-        printf("%lf\t", B[i]);
-    }
+    for (int i = 0; i < n; i++) printf("%lf\t", B[i]);
 }
 
 void print_execution_time(clock_t time_start, clock_t time_end) {
@@ -89,30 +78,25 @@ int len(const char *str) {
 
 void parse_command_line(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
-
         if (argv[i][0] == '-' && len(argv[i]) == 2) {
-            if (argv[i][1] == 'd') {
-                flag_debug = 1;
-            } else if (argv[i][1] == 'e') {
-                flag_errors = 1;
-            } else if (argv[i][1] == 'p') {
-                flag_matrix = 1;
-            } else if (argv[i][1] == 't') {
-                flag_time = 1;
-            } else if (argv[i][1] == 'h' || argv[i][1] == '?') {
+            if (argv[i][1] == 'd') flag_debug = 1;
+            else if (argv[i][1] == 'e') flag_errors = 1;
+            else if (argv[i][1] == 'p') flag_matrix = 1;
+            else if (argv[i][1] == 't') flag_time = 1;
+            else if (argv[i][1] == 'h' || argv[i][1] == '?') {
                 print_help();
                 errors(-6);
                 exit(-6);
-            } else {
+            }
+            else {
                 errors(-3);
                 exit(-3);
             }
-        } else {
-            if (i == 1) {
-                in_filename = argv[1];
-            } else if (i == 2) {
-                out_filename = argv[2];
-            } else {
+        }
+        else {
+            if (i == 1) in_filename = argv[1];
+            else if (i == 2) out_filename = argv[2];
+            else {
                 errors(-3);
                 exit(-3);
             }
@@ -121,7 +105,7 @@ void parse_command_line(int argc, char *argv[]) {
 }
 
 void input() {
-    int temp;
+    int temp = 0;
 
     FILE *in_file = fopen(in_filename, "r");
     if (in_file == NULL) {
@@ -170,9 +154,7 @@ void output(int ans) {
 
     fprintf(out_file, "%d\n", n);
 
-    for (int i = 0; i < n; i++) {
-        fprintf(out_file, "%1.9lf\n", X[i]);
-    }
+    for (int i = 0; i < n; i++) fprintf(out_file, "%1.9lf\n", X[i]);
 }
 
 int main(int argc, char *argv[]) {
@@ -181,17 +163,13 @@ int main(int argc, char *argv[]) {
     parse_command_line(argc, argv);
     input();
 
-    if (flag_matrix) {
-        print_matrix();
-    }
+    if (flag_matrix) print_matrix();
 
     clock_t time_start = clock();
     ans = lss_17_04(n, A, B, X, tmp);
     clock_t time_end = clock();
 
-    if (flag_time) {
-        print_execution_time(time_start, time_end);
-    }
+    if (flag_time) print_execution_time(time_start, time_end);
 
     output(ans);
     mem_free();

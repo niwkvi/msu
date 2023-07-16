@@ -14,64 +14,48 @@ double *ys_real = NULL;
 // [x0, x1]
 
 int errors(int error_code) {
-    if (error_code == -1) {
-        fprintf(stderr, "Can't open the input file\n");
-    } else if (error_code == -2) {
-        fprintf(stderr, "Not enough input values\n");
-    } else if (error_code == -3) {
-        fprintf(stderr, "n and eps have to be > 0\n");
-    } else if (error_code == -4) {
-        fprintf(stderr, "x1 has to be > x0\n");
-    } else if (error_code == -5) {
-        fprintf(stderr, "Can't open the output file\n");
-    } else if (error_code == -6) {
-        fprintf(stderr, "Can't allocate memory\n");
-    }
+    if (error_code == -1) fprintf(stderr, "Can't open the input file\n");
+    else if (error_code == -2) fprintf(stderr, "Not enough input values\n");
+    else if (error_code == -3) fprintf(stderr, "n and eps have to be > 0\n");
+    else if (error_code == -4) fprintf(stderr, "x1 has to be > x0\n");
+    else if (error_code == -5) fprintf(stderr, "Can't open the output file\n");
+    else if (error_code == -6) fprintf(stderr, "Can't allocate memory\n");
     return -1;
 }
 
 int input(char *in_filename, double *x0, double *x1, double *y0, double *y1, int *n, double *eps) {
     FILE *in_file = fopen(in_filename, "r");
-    if (in_file == NULL) {
-        return errors(-1);
-    }
+    if (in_file == NULL) return errors(-1);
 
     int input_count = fscanf(in_file, "%lf %lf %lf %lf %d %lf", x0, x1, y0, y1, n, eps);
 
-    if (input_count != 6) {
-        return errors(-2);
-    } else if (*n <= 0 || *eps <= 0) {
-        return errors(-3);
-    } else if (*x1 <= *x0) {
-        return errors(-4);
-    }
+    if (input_count != 6) return errors(-2);
+    else if (*n <= 0 || *eps <= 0) return errors(-3);
+    else if (*x1 <= *x0) return errors(-4);
 
     fclose(in_file);
+
     return 0;
 }
 
 int output(char *out_filename, int n, int best_n) {
     FILE *out_file = fopen(out_filename, "w");
-    if (out_file == NULL) {
-        return errors(-5);
-    }
+    if (out_file == NULL) return errors(-5);
 
     fprintf(out_file, "%d\n", get_iter_num());
-    for (int i = 0; i <= best_n; i += best_n / n) {
-        fprintf(out_file, "%lf %lf\n", xs[i], ys[i]);
-    }
+    for (int i = 0; i <= best_n; i += best_n / n) fprintf(out_file, "%lf %lf\n", xs[i], ys[i]);
+
     fclose(out_file);
+
     return 0;
 }
 
 int new_mem(int best_n) {
-    xs = (double *) calloc((best_n + 1), sizeof(double));
-    ys = (double *) calloc((best_n + 1), sizeof(double));
-    ys_real = (double *) calloc((best_n + 1), sizeof(double));
+    xs = (double*)calloc((best_n + 1), sizeof(double));
+    ys = (double*)calloc((best_n + 1), sizeof(double));
+    ys_real = (double*)calloc((best_n + 1), sizeof(double));
 
-    if (xs == NULL || ys == NULL || ys_real == NULL) {
-        return errors(-6);
-    }
+    if (xs == NULL || ys == NULL || ys_real == NULL) return errors(-6);
 
     return 0;
 }
@@ -107,7 +91,6 @@ int main() {
     char *out_filename = "out.txt";
 
     double x0, x1, y0, y1, eps;
-
     int n, best_n;
 
     printf("\nStarting!\n");
@@ -129,8 +112,7 @@ int main() {
 
     printf("Success!\n");
 
-    draw_graph(xs, ys, ys_real, best_n + 1);
-
     free_mem();
+    
     return 0;
 }

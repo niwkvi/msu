@@ -46,18 +46,14 @@ void nystrom_init() {
 // Скалярное произведение
 double dot(double *arr1, double *arr2, int size) {
     double res = 0;
-    for (int i = 0; i < size; i++) {
-        res += arr1[i] * arr2[i];
-    }
+    for (int i = 0; i < size; i++) res += arr1[i] * arr2[i];
     return res;
 }
 
 // Квадратичная ошибка
 double get_error(double *arr1, double *arr2, int n) {
     double res = 0.0;
-    for (int i = 0; i < n; i += 2) {
-        res += (arr1[i / 2] - arr2[i]) * (arr1[i / 2] - arr2[i]);
-    }
+    for (int i = 0; i < n; i += 2) res += (arr1[i / 2] - arr2[i]) * (arr1[i / 2] - arr2[i]);
     res = sqrt(res) / n;
     return res;
 }
@@ -80,36 +76,42 @@ double nystrom(double x0, double x1, double y0, double z0, int n, double *ys) {
 
     for (int i = 0; i < n; i++) {
         double k[4] = {0.0};
+
         for (int j = 0; j < 4; j++) {
             double temp1 = x + nystrom_c[j] * h;
             double temp2 = y + nystrom_c[j] * h * z + h * h * dot(k, nystrom_a_[j], j);
             double temp3 = z + h * dot(k, nystrom_a[j], j);
             k[j] = y_eq(temp1, temp2, temp3);
         }
+
         x += h;
         y += h * (z + h * dot(k, nystrom_b_, 4));
         z += h * dot(nystrom_b, k, 4);
         ys[i + 1] = y;
     }
+
     return ys[n];
 }
 
 // Подбор параметра n
 int find_n(double x0, double x1, double y0, double z0, int n, double eps) {
-    double *ys_n = (double *) calloc((n + 1), sizeof(double));
+    double *ys_n = (double*)calloc((n + 1), sizeof(double));
     nystrom(x0, x1, y0, z0, n, ys_n);
 
     double error = eps + 1;
+
     while (error > eps) {
         n *= 2;
-        double *ys_2n = (double *) calloc((n + 1), sizeof(double));
+        double *ys_2n = (double*)calloc((n + 1), sizeof(double));
         nystrom(x0, x1, y0, z0, n, ys_2n);
         error = get_error(ys_n, ys_2n, n + 1);
 
         free(ys_n);
         ys_n = ys_2n;
     }
+
     free(ys_n);
+
     return n;
 }
 
@@ -117,7 +119,7 @@ int find_n(double x0, double x1, double y0, double z0, int n, double eps) {
 // Вычисляет Нюстрема для конкретного z0 и best_n
 double F(double x0, double x1, double y0, double z0, int n, double eps) {
     int best_n = find_n(x0, x1, y0, z0, n, eps);
-    double *ys_temp = (double *) calloc((best_n + 1), sizeof(double));
+    double *ys_temp = (double*)calloc((best_n + 1), sizeof(double));
     double y1_temp = nystrom(x0, x1, y0, z0, best_n, ys_temp);
     free(ys_temp);
     return y1_temp;
@@ -142,6 +144,7 @@ double newton(double x0, double x1, double y0, double y1, int n, double eps) {
         y1_temp = F(x0, x1, y0, z0, n, eps);
         iter_num++;
     }
+    
     return z0;
 }
 
