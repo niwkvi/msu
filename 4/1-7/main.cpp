@@ -5,13 +5,11 @@
 #include "TableTest.h"
 
 int main() {
-
     int memSize = 10'000'000;
+    int num = 1'000'000;
 
     Mem mem(memSize);
     Table table(mem);
-
-    int num = 1'000'000;
 
     TableTest::insertByKeyTest(table, num);
     TableTest::findByKeyTest(table, num);

@@ -6,7 +6,6 @@
 
 class Table : public AbstractTable {
 public:
-
     class TableIterator: public GroupContainer::GroupIterator {
     public:
         TableIterator(Table* table, int index, List::Iterator* iterator);

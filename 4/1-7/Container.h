@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,25 +9,21 @@
 using namespace std;
 
 // Базовый класс для всех абстрактных контейнеров
-class Container
-{
+class Container {
 protected:
     MemoryManager &_memory;
 public:
     // Базовый класс для исключений, которые запускает контейнер
-    struct Error
-    {
+    struct Error {
         char msg[256];
-        Error(const char *err_msg)
-        {
+        Error(const char *err_msg) {
             strcpy(msg, err_msg);
         }
     };
 
-    class Iterator
-    {
+    class Iterator {
     public:
-        // Возврашает явно указатель на элемент, на который указывает итератор в данный момент.
+        // Возвращает явно указатель на элемент, на который указывает итератор в данный момент.
         // Неявно возвращает размер данных.
         // Если итератор показывает за пределы контейнера (например, удален последний элемент), возвращает NULL.
         virtual void* getElement(size_t &size) = 0;

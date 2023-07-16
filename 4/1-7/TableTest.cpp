@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+
 using namespace std::chrono;
 
 #include "TableTest.h"
@@ -7,7 +8,6 @@ using namespace std::chrono;
 size_t size = 0;
 
 void TableTest::insertByKeyTest(Table &table, int num) {
-
     cout << "-INSERT-BY-KEY-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -18,6 +18,7 @@ void TableTest::insertByKeyTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (i % 2 == 0 && temp == nullptr) {
             cout << "The element has been inserted but has not been found\n";
             exit(1);
@@ -26,10 +27,12 @@ void TableTest::insertByKeyTest(Table &table, int num) {
             cout << "The element has not been inserted but has been found\n";
             exit(1);
         }
+
         if (temp != nullptr && *(int*)temp->getElement(size) != i) {
             cout << "The element that has been found does not equal the element that has been inserted\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -43,15 +46,18 @@ void TableTest::insertByKeyTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp == nullptr) {
             cout << "The element has been inserted but has not been found\n";
             exit(1);
         }
+
         if ((i % 2 == 0 && *(int*)temp->getElement(size) != i) ||
-        (i % 2 == 1 && (memcmp(temp->getElement(size), elem, sizeof(size))) != 0)) {
+            (i % 2 == 1 && (memcmp(temp->getElement(size), elem, sizeof(size))) != 0)) {
             cout << "The element that has been found does not equal the element that has been inserted\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -65,7 +71,6 @@ void TableTest::insertByKeyTest(Table &table, int num) {
 }
 
 void TableTest::findByKeyTest(Table &table, int num) {
-
     cout << "-FIND-BY-KEY-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -78,10 +83,12 @@ void TableTest::findByKeyTest(Table &table, int num) {
 
     for (int i = 1; i < num; i+=2) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp != nullptr) {
             cout << "The element has not been inserted but has been found\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -93,7 +100,6 @@ void TableTest::findByKeyTest(Table &table, int num) {
 }
 
 void TableTest::removeByKeyTest(Table &table, int num) {
-
     cout << "-REMOVE-BY-KEY-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -112,6 +118,7 @@ void TableTest::removeByKeyTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (i % 2 == 0 && temp != nullptr) {
             cout << "The element has been removed but has been found\n";
             exit(1);
@@ -120,6 +127,7 @@ void TableTest::removeByKeyTest(Table &table, int num) {
             cout << "The element has been inserted but has not been found\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -131,10 +139,12 @@ void TableTest::removeByKeyTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp != nullptr) {
             cout << "The element has been removed but has been found\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -146,7 +156,6 @@ void TableTest::removeByKeyTest(Table &table, int num) {
 }
 
 void TableTest::removeTest(Table &table, int num) {
-
     cout << "-REMOVE-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -174,20 +183,18 @@ void TableTest::removeTest(Table &table, int num) {
     temp = table.newIterator();
 
     while (true) {
-        if (temp->getElement(size) == nullptr)
-            break;
+        if (temp->getElement(size) == nullptr) break;
+
         int elem = *(int*)temp->getElement(size);
 
-        if (elem % 2 == 0 && temp->hasNext())
-            temp->goToNext();
-        else if (elem % 2 == 1)
-            table.remove(temp);
-        else
-            break;
+        if (elem % 2 == 0 && temp->hasNext()) temp->goToNext();
+        else if (elem % 2 == 1) table.remove(temp);
+        else break;
     }
 
     for (int i = 0; i < num; i++) {
         temp = table.findByKey(&i, sizeof(int));
+
         if (i % 2 == 1 && temp != nullptr) {
             cout << "The element has been removed but has been found\n";
             exit(1);
@@ -218,7 +225,6 @@ void TableTest::removeTest(Table &table, int num) {
 }
 
 void TableTest::clearTest(Table &table, int num) {
-
     cout << "-CLEAR-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -235,10 +241,12 @@ void TableTest::clearTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp != nullptr) {
             cout << "The element has been removed but has been found\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -250,7 +258,6 @@ void TableTest::clearTest(Table &table, int num) {
 }
 
 void TableTest::iteratorTest(Table &table, int num) {
-
     cout << "-ITERATOR-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -294,7 +301,6 @@ void TableTest::iteratorTest(Table &table, int num) {
 }
 
 void TableTest::sizeTest(Table &table, int num) {
-
     cout << "-SIZE-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -311,10 +317,12 @@ void TableTest::sizeTest(Table &table, int num) {
 
     for (int i = 0; i < num; i+=2) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp == nullptr) {
             cout << "Error1\n";
             exit(1);
         }
+
         if (temp->getElement(size) == nullptr || size != sizeof(int)) {
             cout << "Error2\n";
             exit(1);
@@ -323,10 +331,12 @@ void TableTest::sizeTest(Table &table, int num) {
 
     for (long long int i = 1; i < num; i+=2) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(long long int));
+
         if (temp == nullptr) {
             cout << "Error1\n";
             exit(1);
         }
+
         if (temp->getElement(size) == nullptr || size != sizeof(long long int)) {
             cout << "Error2\n";
             exit(1);
@@ -348,7 +358,6 @@ void TableTest::sizeTest(Table &table, int num) {
 }
 
 void TableTest::timeTest(Table &table, int num) {
-
     cout << "-TIME-TEST-" << endl;
 
     auto now = system_clock::now();
@@ -364,10 +373,12 @@ void TableTest::timeTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (temp == nullptr) {
             cout << "The element has been inserted but has not been found\n";
             exit(1);
         }
+
         delete temp;
     }
 
@@ -387,6 +398,7 @@ void TableTest::timeTest(Table &table, int num) {
 
     for (int i = 0; i < num; i++) {
         Container::Iterator* temp = table.findByKey(&i, sizeof(int));
+
         if (i % 2 == 0 && temp == nullptr) {
             cout << "The element has been inserted but has not been found\n";
             exit(1);
@@ -395,6 +407,7 @@ void TableTest::timeTest(Table &table, int num) {
             cout << "The element has been removed but has been found\n";
             exit(1);
         }
+        
         delete temp;
     }
 

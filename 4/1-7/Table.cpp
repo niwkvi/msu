@@ -1,10 +1,9 @@
 #include "Table.h"
 
 Table::TableIterator::TableIterator(Table* table, int index, GroupContainerList::Iterator* listIterator) :
-            GroupContainer::GroupIterator(table, index, listIterator) {}
+                                    GroupContainer::GroupIterator(table, index, listIterator) {}
 
 void* GroupContainer::GroupIterator::getElement(size_t &size) {
-
     if (listIterator == nullptr) {
         size = 0;
         return nullptr;
@@ -15,8 +14,7 @@ void* GroupContainer::GroupIterator::getElement(size_t &size) {
     size_t elemSize = 0;
     size_t temp = 0;
 
-    if (listIterator->getElement(temp) == nullptr)
-        return nullptr;
+    if (listIterator->getElement(temp) == nullptr) return nullptr;
 
     char* data = static_cast<char*>(listIterator->getElement(temp));
 
@@ -31,7 +29,6 @@ void* GroupContainer::GroupIterator::getElement(size_t &size) {
 Table::Table(MemoryManager &mem) : AbstractTable(mem) {}
 
 int Table::insertByKey(void* key, size_t keySize, void* elem, size_t elemSize) {
-
     size_t size = sizeof(size_t);
 
     size_t keySizeAndKeySize = size + keySize;
@@ -58,7 +55,6 @@ void Table::removeByKey(void* key, size_t keySize) {
 }
 
 Container::Iterator* Table::findByKey(void* key, size_t keySize) {
-
     size_t size = sizeof(size_t);
     size_t keySizeAndKeySize = size + keySize;
 
@@ -71,11 +67,8 @@ Container::Iterator* Table::findByKey(void* key, size_t keySize) {
 }
 
 void* Table::at(void* key, size_t keySize, size_t &valueSize) {
-
     auto* iterator = dynamic_cast<GroupIterator*>(findByKey(key, keySize));
-    if (iterator == nullptr)
-        return nullptr;
-
+    if (iterator == nullptr) return nullptr;
     return iterator->getElement(valueSize);
 }
 
@@ -84,25 +77,18 @@ size_t Table::hash_function(void* key, size_t keySize) {
 }
 
 Container::Iterator* Table::find(void* elem, size_t size) {
-
     size_t elemSize = 0;
 
     Container::Iterator* iterator = newIterator();
-    if (iterator == nullptr)
-        return nullptr;
+    if (iterator == nullptr) return nullptr;
 
     do {
         void* elemFound = iterator->getElement(elemSize);
         if (elemSize == size) {
-            if (memcmp(elemFound, elem, size) == 0)
-                return iterator;
+            if (memcmp(elemFound, elem, size) == 0) return iterator;
         }
-
-        if (iterator->hasNext())
-            iterator->goToNext();
-        else
-            break;
-
+        if (iterator->hasNext()) iterator->goToNext();
+        else break;
     } while (true);
 
     delete dynamic_cast<GroupIterator*>(iterator);
@@ -111,15 +97,9 @@ Container::Iterator* Table::find(void* elem, size_t size) {
 }
 
 Container::Iterator* Table::newIterator() {
-
     for (int i = 0; i < SIZE; i++) {
-        if (table[i] != nullptr && !table[i]->empty()) {
-            return new TableIterator(
-                    this,
-                    i,
-                    dynamic_cast<GroupContainerList::Iterator*>(table[i]->newIterator())
-            );
-        }
+        if (table[i] != nullptr && !table[i]->empty())
+            return new TableIterator(this, i, dynamic_cast<GroupContainerList::Iterator*>(table[i]->newIterator()));
     }
     return new TableIterator(this, SIZE,nullptr);
 }

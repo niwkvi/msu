@@ -1,9 +1,9 @@
 #pragma once
+
 #include "GroupList.h"
 
 // Абстрактный класс: однонаправленный список
-class AbstractList: public GroupList
-{
+class AbstractList: public GroupList {
 public:
     // конструктор
     explicit AbstractList(MemoryManager &mem): GroupList(mem) {}

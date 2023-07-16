@@ -4,7 +4,6 @@
 
 class List: public AbstractList {
 private:
-
     struct Element {
         void* data;
         size_t dataSize;
@@ -12,13 +11,11 @@ private:
     };
 
 public:
-
     Element* firstElement;
     int num = 0;
 
     class ListIterator: public Container::Iterator {
     public:
-
         Element* currentElement;
 
         explicit ListIterator(Element* currentElement) : currentElement(currentElement) {}
@@ -33,15 +30,13 @@ public:
         }
 
         bool hasNext() override {
-            if (currentElement == nullptr || currentElement->nextElement == nullptr)
-                return false;
+            if (currentElement == nullptr || currentElement->nextElement == nullptr) return false;
             return true;
         }
 
         void goToNext() override {
-            if (currentElement != nullptr && currentElement->nextElement != nullptr) {
+            if (currentElement != nullptr && currentElement->nextElement != nullptr)
                 currentElement = currentElement->nextElement;
-            }
         }
 
         bool equals(Iterator* right) override {
@@ -69,22 +64,19 @@ public:
         frontElement->nextElement = firstElement;
 
         firstElement = frontElement;
-
         num++;
 
         return 0;
     }
 
     void pop_front() override {
-        if (firstElement == nullptr)
-            return;
+        if (firstElement == nullptr) return;
 
         auto* secondElement = firstElement->nextElement;
         delete[]static_cast<char*>(firstElement->data);
         delete firstElement;
 
         firstElement = secondElement;
-
         num--;
     }
 
@@ -94,7 +86,6 @@ public:
             return nullptr;
         }
         size = firstElement->dataSize;
-
         return firstElement->data;
     }
 
@@ -102,12 +93,10 @@ public:
         auto* newIter = dynamic_cast<ListIterator*>(iter);
         auto* findIter = dynamic_cast<ListIterator*>(newIterator());
 
-        if (newIter->equals(findIter))
-            return push_front(elem, elemSize);
+        if (newIter->equals(findIter)) return push_front(elem, elemSize);
 
         while (findIter->currentElement->nextElement != newIter->currentElement) {
-            if (findIter->hasNext())
-                findIter->goToNext();
+            if (findIter->hasNext()) findIter->goToNext();
         }
 
         auto* newElement = new Element();
@@ -139,28 +128,25 @@ public:
 
     Iterator* find(void* elem, size_t size) override {
         auto* iter = dynamic_cast<ListIterator*>(newIterator());
-        if (iter == nullptr)
-            return nullptr;
+        if (iter == nullptr) return nullptr;
 
         while (iter->currentElement != nullptr) {
             if (size != iter->currentElement->dataSize) {
-                if (iter->hasNext())
-                    iter->goToNext();
-                else
-                    return nullptr;
+                if (iter->hasNext()) iter->goToNext();
+                else return nullptr;
                 continue;
             }
-            if (memcmp(elem, iter->currentElement->data, size) == 0)
-                break;
-            else if (iter->hasNext())
-                iter->goToNext();
-            else
-                return nullptr;
+
+            if (memcmp(elem, iter->currentElement->data, size) == 0) break;
+            else if (iter->hasNext()) iter->goToNext();
+            else return nullptr;
         }
+
         if (iter->currentElement == nullptr) {
             delete iter;
             return nullptr;
         }
+
         return iter;
     }
 
@@ -170,8 +156,8 @@ public:
 
     void remove(Iterator* iter) override {
         auto* newIter = dynamic_cast<ListIterator*>(iter);
-        if (newIter->currentElement == nullptr)
-            return;
+        if (newIter->currentElement == nullptr) return;
+
         auto* findIter = dynamic_cast<ListIterator*>(newIterator());
 
         if (newIter->equals(findIter)) {
@@ -181,8 +167,7 @@ public:
         }
 
         while (findIter->currentElement->nextElement != newIter->currentElement) {
-            if (findIter->hasNext())
-                findIter->goToNext();
+            if (findIter->hasNext()) findIter->goToNext();
         }
 
         findIter->currentElement->nextElement = newIter->currentElement->nextElement;
@@ -202,7 +187,6 @@ public:
             delete[]static_cast<char*>(element->data);
             auto* nextElement = element->nextElement;
             delete element;
-
             element = nextElement;
         }
 
@@ -211,8 +195,7 @@ public:
     }
 
     bool empty() override {
-        if (firstElement == nullptr)
-            return true;
+        if (firstElement == nullptr) return true;
         return false;
     }
 };
