@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": ["in.txt", "out.txt"],
+            "args": ["17_1_08task.cpp", "os_file.h"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -24,7 +24,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: gcc.exe build active file"
+            "preLaunchTask": "g++.exe build active file"
         }
     ],
     "version": "2.0.0"
