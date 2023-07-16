@@ -1,7 +1,6 @@
 #include "Test.h"
 
 int main() {
-
     Test test;
 
     bool test1 = false;
@@ -13,24 +12,17 @@ int main() {
     cout << "Testing" << endl;
     cout << "--------------------------------------------------------------" << endl;
 
-    ofstream f1, f2, f11, f22;
-    f1.open("C:/Users/Gondolin/CLionProjects/27/table1.csv");
-    f2.open("C:/Users/Gondolin/CLionProjects/27/table2.csv");
-    f11.open("C:/Users/Gondolin/CLionProjects/27/table11.csv");
-    f22.open("C:/Users/Gondolin/CLionProjects/27/table22.csv");
+    ofstream f1, f2;
+    f1.open("table1.csv");
+    f2.open("table2.csv");
 
     f1 << "steps,time,avgTime,size,density,edges" << endl;
     f2 << "steps,time,avgTime,size,density,edges" << endl;
-    f11 << "steps,time,avgTime,size,density,edges" << endl;
-    f22 << "steps,time,avgTime,size,density,edges" << endl;
 
     f1.close();
     f2.close();
-    f11.close();
-    f22.close();
 
     if (test1) {
-
         cout << "Test 1" << endl;
         cout << "--------------------------------------------------------------" << endl;
 
@@ -45,7 +37,6 @@ int main() {
         cout << "FW" << endl;
 
         for (int i = 1; i <= test1Num1; i++) {
-
             cout << "--------------------------------------------------------------" << endl;
             cout << "Test #" << i << endl << endl;
             cout << "Size: " << test1Size1 << endl;
@@ -63,14 +54,12 @@ int main() {
             cout << "Test #" << i << " is over" << endl;
 
             test1Size1 += test1Size1Increase;
-
         }
 
         cout << "--------------------------------------------------------------" << endl;
         cout << "Generated Answer" << endl;
 
         for (int i = 1; i <= test1Num2; i++) {
-
             cout << "--------------------------------------------------------------" << endl;
             cout << "Test #" << i << endl << endl;
             cout << "Size: " << test1Size2 << endl;
@@ -88,15 +77,11 @@ int main() {
             cout << "Test #" << i << " is over" << endl;
 
             test1Size2 += test1Size2Increase;
-
         }
-
         cout << "--------------------------------------------------------------" << endl;
-
     }
 
     if (test2) {
-
         cout << "Test 2" << endl;
         cout << "--------------------------------------------------------------" << endl;
 
@@ -109,7 +94,6 @@ int main() {
         cout << "Hyperbola (5 tests)" << endl;
 
         for (int i = 1; i <= test2Num; i++) {
-
             cout << "--------------------------------------------------------------" << endl;
             cout << "Test #" << i << endl << endl;
             cout << "Size: " << test2Size << endl;
@@ -128,15 +112,11 @@ int main() {
 
             test2Size += test2SizeIncrease;
             test2Density += test2DensityIncrease;
-
         }
-
         cout << "--------------------------------------------------------------" << endl;
-
     }
 
     if (test3) {
-
         cout << "Test 3" << endl;
         cout << "--------------------------------------------------------------" << endl;
 
@@ -148,7 +128,6 @@ int main() {
         cout << "Comparing" << endl;
 
         for (int i = 1; i <= test3Num; i++) {
-
             cout << "--------------------------------------------------------------" << endl;
             cout << "Test #" << i << endl << endl;
             cout << "Size: " << test3Size << endl;
@@ -166,9 +145,7 @@ int main() {
             cout << "Test #" << i << " is over" << endl;
 
             test3Size += test3SizeIncrease;
-
         }
-
     }
 
     cout << "--------------------------------------------------------------" << endl;
@@ -176,5 +153,4 @@ int main() {
     cout << "--------------------------------------------------------------" << endl;
 
     return 0;
-
 }

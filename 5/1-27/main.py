@@ -3,9 +3,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
-
-data1 = pd.read_csv('C:/Users/Gondolin/CLionProjects/27/table1.csv', delimiter=',')
-data2 = pd.read_csv('C:/Users/Gondolin/CLionProjects/27/table2.csv', delimiter=',')
+data1 = pd.read_csv('table1.csv', delimiter=',')
+data2 = pd.read_csv('table2.csv', delimiter=',')
 
 x1 = np.array(data1['size'])
 y1 = np.array(data1['density'])

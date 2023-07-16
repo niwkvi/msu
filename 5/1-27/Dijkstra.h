@@ -4,9 +4,7 @@
 
 class Dijkstra {
 public:
-
     int count;
-
     int graphSize;
     int startingVertex;
 

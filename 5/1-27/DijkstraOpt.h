@@ -4,9 +4,7 @@
 
 class DijkstraOpt {
 public:
-
     int count;
-
     int graphSize;
     int startingVertex;
 

@@ -3,6 +3,7 @@
         "cmath": "cpp",
         "chrono": "cpp",
         "algorithm": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "ostream": "cpp"
     }
 }

@@ -9,7 +9,6 @@ private:
 
     int graphSize;
     int startingVertex;
-
 public:
     vector<int> distMin;
 

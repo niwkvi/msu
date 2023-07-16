@@ -11,7 +11,7 @@
 #include <ctime>
 #include <chrono>
 
-#define INF ((1LL<<31)-1)
+#define INF ((1LL << 31) - 1)
 
 using namespace std;
 
@@ -20,7 +20,6 @@ public:
     int graphSize;
     int startingVertex;
     double graphDensity;
-
     unsigned int edges;
 
     vector<vector<int>> adjMatrix;
